@@ -31,7 +31,7 @@ class App extends React.Component {
 
   getNews = async (query, cat) => {
     let url;
-    if(query.length == 0){
+    if(query.length === 0){
       url =`https://newsapi.org/v2/top-headlines?category=${cat}&pageSize=50&apiKey=78b9d599c4f94f8fa3afb1a5458928d6`;
 
     }
@@ -46,10 +46,10 @@ class App extends React.Component {
 
 
   render() {
-    let entClass = this.state.selectedCategory == 'entertainment'? 'enable' : 'disable';
-    let techClass = this.state.selectedCategory == 'technology'? 'enable' : 'disable';
-    let sportsClass = this.state.selectedCategory == 'sports'? 'enable' : 'disable';
-    let firstSearch = this.state.selectedCategory == '';
+    let entClass = this.state.selectedCategory === 'entertainment'? 'enable' : 'disable';
+    let techClass = this.state.selectedCategory === 'technology'? 'enable' : 'disable';
+    let sportsClass = this.state.selectedCategory === 'sports'? 'enable' : 'disable';
+    let firstSearch = this.state.selectedCategory === '';
     let noArticles = this.state.articles.length === 0 && !firstSearch;
     return (
       <div className="App">
@@ -65,8 +65,8 @@ class App extends React.Component {
           <button class={'topic-button ' + techClass} id="technology" onClick={() => this.setCategory('technology')}>technology</button>
           <button class={'topic-button ' + sportsClass} id="sports" onClick={() => this.setCategory('sports')}>sports</button>
         </div>
-        {firstSearch == true && <h3>search for something and select a category to get surfin'</h3>}
-        {noArticles == true && <h3>nothing to see here...</h3>}
+        {firstSearch === true && <h3>search for something and select a category to get surfin'</h3>}
+        {noArticles === true && <h3>nothing to see here...</h3>}
 
         <div class="container">
           {this.state.articles.map((article)=>(
@@ -76,10 +76,10 @@ class App extends React.Component {
                 <h5 class="card-title">{article.title}</h5>
                 <p class="card-text"><small class="text-muted">Published by {article.source.name} on {(new Date(article.publishedAt)).toDateString()}</small></p>
                 <p class="card-description">{article.description || ''}</p>
-                <a href={article.url} target="_blank" class="btn btn-secondary">Read More</a>
+                <a href={article.url} target="_blank" rel="noreferrer"  class="btn btn-secondary">Read More</a>
               </div>
               {article.urlToImage &&
-                    <img class="card-img-bottom" src={article.urlToImage}></img>
+                    <img class="card-img-bottom" src={article.urlToImage} alt="pic associated with news"></img>
               }
             </div>
             <br></br>
